@@ -1,0 +1,16 @@
+# Example from: https://matthewpalmer.net/kubernetes-app-developer/articles/configmap-example-yaml.html
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: udagram-env-vars
+  namespace: default
+data:
+  # Configuration values can be set as key-value properties
+  POSTGRES_HOST: cdr.ccjvshc5fodm.eu-west-1.rds.amazonaws.com
+  POSTGRES_DB: postgres
+  AWS_BUCKET: test-293804951370-dev
+  AWS_REGION: eu-west-1
+  AWS_PROFILE: default
+  JWT_SECRET: HelloWorld
+  URL: http://localhost:8100
+

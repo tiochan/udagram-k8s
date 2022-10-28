@@ -1,0 +1,20 @@
+# YML File from udacity training course:
+#
+version: "3"
+services:
+  reverseproxy:
+    build:
+      context: ../udagram-reverseproxy
+    image: tiochan/udagram-reverseproxy:v1
+  backend_user:
+    build:
+      context: ../udagram-api-user
+    image: tiochan/udagram-api-user:v1
+  backend_feed:
+    build:
+      context: ../udagram-api-feed
+    image: tiochan/udagram-api-feed:v1
+  frontend:
+    build:
+      context: ../udagram-frontend
+    image: tiochan/udagram-frontend:v1

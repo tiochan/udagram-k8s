@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-feed
+  labels:
+    service: backend-feed
+spec:
+  selector:
+    matchLabels:
+      service: backend-feed
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        service: backend-feed
+    spec:
+      containers:
+        - name: backend-feed
+          image: 'tiochan/udagram-api-feed:v1'
+          resources:
+            requests:
+              memory: 1500Mi
+              cpu: 250m
+            limits:
+              memory: 1500Mi
+              cpu: 500m
+#          ports:
+#          - containerPort: 8080
+          env:
+            - name: POSTGRES_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: udagram-env-secrets
+                  key: POSTGRES_USERNAME
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: udagram-env-secrets
+                  key: POSTGRES_PASSWORD
+          envFrom:
+            - configMapRef:
+                name: udagram-env-vars
+                optional: False
+          volumeMounts:
+            - name: udagram-aws-secrets
+              mountPath: "/root/.aws/"
+              readOnly: true
+      volumes:
+        - name: udagram-aws-secrets
+          secret:
+            secretName: udagram-aws-secrets
