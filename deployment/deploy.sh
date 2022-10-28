@@ -26,6 +26,8 @@ kubectl autoscale deployment frontend --cpu-percent=75 --min=2 --max=10
 kubectl expose deployment frontend --type=LoadBalancer --name=publicfrontend --port=80
 kubectl expose deployment reverseproxy --type=LoadBalancer --name=publicreverseproxy --port=8080
 
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+
 kubectl get services
 
 echo "Add public IP of the reverseproxy to frontend's config:"
