@@ -11,6 +11,6 @@ data:
   AWS_BUCKET: test-293804951370-dev
   AWS_REGION: eu-west-1
   AWS_PROFILE: default
-  JWT_SECRET: HelloWorld
+  JWT_SECRET: ___PUT_JWT___
   URL: http://localhost:8100
 
